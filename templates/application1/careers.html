@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Openings - Junior Lecturer</title>
+    <link rel="stylesheet" href="{% static 'CSS/careers.css' %}">
+</head>
+<body>
+    <h1>Junior Lecturer Job Openings</h1>
+    
+    {% for job in jobs %}
+        <div class="job-opening">
+            <h2>{{ job.position }} Job Opening</h2>
+            <p><strong>Location:</strong> {{ job.location }}</p>
+            <p><strong>Position:</strong> {{ job.position }}</p>
+            <p><strong>Years of Experience:</strong> {{ job.years_of_experience }} years</p>
+            <p><strong>Qualification:</strong> {{ job.qualification }}</p>
+            <p><strong>Teaching Experience:</strong> {% if job.teaching_experience %}Required{% else %}Preferred{% endif %}</p>
+
+            <h3>Key Requirements:</h3>
+            <ul>
+                {% for requirement in job.key_requirements.splitlines %}
+                <li>{{ requirement }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3>Job Details:</h3>
+            <ul>
+                <li><strong>Type:</strong> {{ job.type }}</li>
+                <li><strong>Pay Range:</strong> {{ job.pay_range }}</li>
+                <li><strong>Schedule:</strong> {{ job.schedule }}</li>
+                <li><strong>Note:</strong> {{ job.note }}</li>
+                <li><strong>Contact:</strong> {{ job.contact }}</li>
+                <li><strong>Work Location:</strong> {{ job.work_location }}</li>
+            </ul>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>
+

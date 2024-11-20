@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <link rel="stylesheet" href="{% static 'CSS/student_display.css' %}">
+</head>
+<body>
+    <h1>Student List</h1>
+    <span>
+        <label for="searchName" class="label">Search By Name:</label>
+        <input type="text" id="searchName" placeholder="Enter the Student Name" class="C" onkeyup="filterTable()">
+    </span>
+    <span>
+        <label for="searchRoll" class="label">Search by Registration Number:</label>
+        <input type="text" id="searchRoll" placeholder="Enter registration number" class="C" onkeyup="filterTable()">
+    </span>
+    <span>
+        <label for="searchCourse" class="label">Search by Course:</label>
+        <input type="text" id="searchCourse" placeholder="Enter the Course" class="C" onkeyup="filterTable()">
+    </span> 
+    <table id="studentsTable">
+        <tr>
+            <th>Student Name</th>
+            <th>Course</th>
+            <th>Percentage of Marks in 10th Class</th>
+            <th>Registration Number</th>
+            <th>Actions</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.course }}</td>
+            <td>{{ student.percentage_marks }}</td> <!-- Corrected the spelling here -->
+            <td>{{ student.roll_number }}</td>
+            <td>
+                <a href="{% url 'editstudent' student.pk %}" class="A" style="text-decoration: none;">Edit</a>
+                &nbsp;&nbsp;
+                <form action="{% url 'deletestudent' student.pk %}" method="post" style="display:inline-block;">
+                    {% csrf_token %}
+                    <button type="submit" class="B">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        function filterTable() {
+            // Get input values
+            let inputName = document.getElementById('searchName').value.toLowerCase();
+            let inputRoll = document.getElementById('searchRoll').value.toLowerCase();
+            let inputCourse = document.getElementById('searchCourse').value.toLowerCase();
+            let table = document.getElementById("studentsTable");
+            let rows = table.getElementsByTagName("tr");
+
+            // Loop through all table rows and hide those that don't match search queries
+            for (let i = 1; i < rows.length; i++) {  // Start at 1 to skip the header row
+                let name = rows[i].getElementsByTagName("td")[0].textContent.toLowerCase();
+                let roll = rows[i].getElementsByTagName("td")[3].textContent.toLowerCase();
+                let course = rows[i].getElementsByTagName("td")[1].textContent.toLowerCase();
+
+                // Check if the row should be displayed based on the input values
+                if (name.indexOf(inputName) > -1 && roll.indexOf(inputRoll) > -1 && course.indexOf(inputCourse) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

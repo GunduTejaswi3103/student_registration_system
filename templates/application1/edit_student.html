@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="{% static 'CSS/Registration.css' %}">
+    <script src="{% static 'CSS/jquery.min.js' %}"></script>
+</head>
+<body>
+    <section>
+        <h1>Edit Student Form</h1>
+        <form id="EditStudentForm" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" name="name" placeholder="Name" value="{{ student.name }}" autocomplete="off" maxlength="100" required>
+            </div>
+            <div>
+                <label for="roll_number">Roll Number:</label>
+                <input type="text" name="roll_number" placeholder="Roll Number" value="{{ student.roll_number }}" autocomplete="off" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" name="email" placeholder="Email" value="{{ student.email }}" autocomplete="off" required>
+            </div>
+            <div>
+                <label for="course">Course:</label>
+                <select name="course" required>
+                    <option value="" disabled>Course</option>
+                    <option value="C.E.C" {% if student.course == "C.E.C" %}selected{% endif %}>C.E.C</option>
+                    <option value="M.P.C" {% if student.course == "M.P.C" %}selected{% endif %}>M.P.C</option>
+                    <option value="Bi.P.C" {% if student.course == "Bi.P.C" %}selected{% endif %}>Bi.P.C</option>
+                    <option value="M.E.C" {% if student.course == "M.E.C" %}selected{% endif %}>M.E.C</option>
+                </select>
+            </div>
+            <div>
+                <label for="dob">Date Of Birth:</label>
+                <input type="date" name="dob" placeholder="Date Of Birth" value="{{ student.dob }}" autocomplete="off" required>
+            </div>
+            <div>
+                <label for="fathername">Father's Name:</label>
+                <input type="text" name="fathername" placeholder="Father's Name" value="{{ student.father_name }}" autocomplete="off" maxlength="100" required>
+            </div>
+            <div>
+                <label for="mothername">Mother's Name:</label>
+                <input type="text" name="mothername" placeholder="Mother's Name" value="{{ student.mother_name }}" autocomplete="off" maxlength="100" required>
+            </div>
+            <div>
+                <label>Gender</label>
+                <div class="gender-group-container">
+                    <div class="gender-group">
+                        <input type="radio" name="gender" value="Male" id="male" {% if student.gender == "Male" %}checked{% endif %} required>
+                        <label for="male">Male</label>
+                        <input type="radio" name="gender" value="Female" id="female" {% if student.gender == "Female" %}checked{% endif %} required>
+                        <label for="female">Female</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label for="phn_num">Phone Number:</label>
+                <input type="text" name="phn_num" placeholder="Phone Number" value="{{ student.phone_number }}" autocomplete="off" required>
+            </div>
+            <div>
+                <label>Hobbies:</label>
+                <div class="hobbies-group-container">
+                    <div class="hobbies-group">
+                        <input type="checkbox" name="hobbies" value="Reading" id="reading" {% if 'Reading' in student.hobbies %}checked{% endif %}>
+                        <label for="reading">Reading</label>
+                        <input type="checkbox" name="hobbies" value="Sports" id="sports" {% if 'Sports' in student.hobbies %}checked{% endif %}>
+                        <label for="sports">Sports</label>
+                        <input type="checkbox" name="hobbies" value="Music" id="music" {% if 'Music' in student.hobbies %}checked{% endif %}>
+                        <label for="music">Music</label>
+                        <input type="checkbox" name="hobbies" value="Dancing" id="dancing" {% if 'Dancing' in student.hobbies %}checked{% endif %}>
+                        <label for="dancing">Dancing</label>
+                        <input type="checkbox" name="hobbies" value="Other" id="other" {% if 'Other' in student.hobbies %}checked{% endif %}>
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label for="per">Percentage of Marks in 10th class:</label>
+                <input type="number" name="per" placeholder="Percentage of Marks in 10th class" value="{{ student.percentage_marks }}" autocomplete="off" required min="1" max="100">
+            </div>
+            <div>
+                <label for="coaching">Coaching:</label>
+                <select name="coaching" required>
+                    <option value="" disabled>Coaching</option>
+                    <option value="AP CET" {% if student.coaching == "AP CET" %}selected{% endif %}>AP CET</option>
+                    <option value="IIT" {% if student.coaching == "IIT" %}selected{% endif %}>IIT</option>
+                    <option value="AIEEE" {% if student.coaching == "AIEEE" %}selected{% endif %}>AIEEE</option>
+                </select>
+            </div>
+            <div>
+                <label for="hostel-day">Hostel Or Day Scholar:</label>
+                <select name="hostel-day" required>
+                    <option value="" disabled>Hostel Or Day Scholar</option>
+                    <option value="Day Scholar" {% if student.hostel_day == "Day Scholar" %}selected{% endif %}>Day Scholar</option>
+                    <option value="Hostel" {% if student.hostel_day == "Hostel" %}selected{% endif %}>Hostel</option>
+                </select>
+            </div>
+            <div>
+                <label for="address">Address:</label>
+                <textarea name="address" placeholder="Address" maxlength="250" required>{{ student.address }}</textarea>
+            </div>
+            <div>
+                <label for="about">About Yourself:</label>
+                <textarea name="about" placeholder="About Yourself" maxlength="500" required>{{ student.about_yourself }}</textarea>
+            </div>
+            <div>
+                <label for="photo">Upload Photo:</label>
+                <input type="file" name="photo" placeholder="Upload Photo" autocomplete="off" accept=".jpg,.png,.jpeg" required>
+            </div>
+            <input type="submit" value="Update Student">
+        </form>
+    </section>
+
+    <script src="{% static 'CSS/jquery.min.js' %}"></script>
+</body>
+</html>

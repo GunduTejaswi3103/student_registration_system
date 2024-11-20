@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+}
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background-color: blue;
+    color: white;
+}
+tr:nth-child(odd) {
+    background-color: #eeecec66;
+}
+tr:hover {
+    background-color: #e6eded;
+}
+.A
+{
+    background-color: green;
+    text-align: center;
+    border-radius: 3px;
+    color: white;
+    border: white;
+}
+.B
+{
+    background-color: red;
+    text-align: center;
+    border-radius: 3px;
+    color: white;
+    border: white;
+
+}
+.C{
+    width: 300px;
+}
+input[type="submit"]:hover {
+    background-color: #ddd;
+}

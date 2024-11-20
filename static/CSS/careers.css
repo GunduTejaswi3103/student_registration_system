@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    background-image: url('careers.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: 50px;
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    margin-top: 20px;
+    color: white;
+}
+
+p {
+    color: white;
+}
+
+p strong {
+    color: white;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    text-decoration: none;
+    color: white;
+}
+
+ul li strong {
+    color: white;
+}
+
+.job-opening h3 {
+    color: white;
+}
+
+.job-opening ul li {
+    color: white;
+}
+
+.job-opening ul li strong {
+    color: white;
+}

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'CSS/registration.css' %}">
+    <script src="{% static 'CSS/jquery.min.js' %}"></script>
+</head>
+<body>
+    <section>
+        <h1 >Student Registration Form</h1>   
+        <form id="RegistrationForm" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div><label for="">Name:</label></td>
+                <input type="text" placeholder="Name" autocomplete="off" id="name" maxlength="100" required>
+            </div>
+            <div>
+                <label for="">Roll Number:</label>
+                <input type="text" placeholder="Roll Number" autocomplete="off" id="roll_number" required>
+            </div>
+            <div>
+                <label for="">Email:</label></td>
+                <input type="email" placeholder="Email" autocomplete="off" id="email" required >
+            </div>
+            <div>
+                <label for="">Course:</label>
+                    <select name="" id="course" required>
+                        <option value="" disabled>Course</option>
+                        <option value="C.E.C">C.E.C</option>
+                        <option value="M.P.C">M.P.C</option>
+                        <option value="Bi.P.C">Bi.P.C</option>
+                        <option value="M.E.C">M.E.C</option>
+                    </select>
+            </div> 
+            <div>
+                <label for="">Date Of Birth:</label>
+                <input type="date" placeholder="Date Of Birth" autocomplete="off" id="dob" required >
+            </div>  
+            <div>
+                <label for="">Fathers's Name:</label>
+                <input type="text" placeholder="Father's Name" autocomplete="off" id="fathername" maxlength="100" required>
+            </div>
+            <div>
+                <label for="">Mother's Name:</label>
+                <input type="text" placeholder="Mother's Name" autocomplete="off" id="mothername" maxlength="100" required>
+            </div>
+            <div>
+                <label>Gender</label>
+                <div class="gender-group-container">
+                    <div class="gender-group">
+                        <input type="radio" name="gender" value="Male" id="male" required>
+                        <label for="male">Male</label>
+                        <input type="radio" name="gender" value="Female" id="female" required>
+                        <label for="female">Female</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label for="">Phone Number:</label>
+                <input type="text" placeholder="Phone Number" autocomplete="off" id="phn_num" required>
+            </div>
+            <div>
+                <label>Hobbies:</label>
+                <div class="hobbies-group-container">
+                    <div class="hobbies-group">
+                        <input type="checkbox" name="hobbies" value="Reading" id="reading">
+                        <label for="reading">Reading</label>
+                        <input type="checkbox" name="hobbies" value="Sports" id="sports">
+                        <label for="sports">Sports</label>
+                        <input type="checkbox" name="hobbies" value="Music" id="music">
+                        <label for="music">Music</label>
+                        <input type="checkbox" name="hobbies" value="Dancing" id="dancing">
+                        <label for="dancing">Dancing</label>
+                        <input type="checkbox" name="hobbies" value="Other" id="other">
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label for="">Percentage of Marks in 10th class:</label>
+                <input type="number" placeholder="Percentage of Marks in 10th class" autocomplete="off" id="per" required min="1" max="100">
+            </div>
+            <div>
+                <label for="">Coaching:</label>
+                    <select name="" id="coaching" required>
+                        <option value="" disabled>Coaching</option>
+                        <option value="AP CET">AP CET</option>
+                        <option value="IIT">IIT</option>
+                        <option value="AIEEE">AIEEE</option>
+                    </select>
+            </div>
+            <div>
+                <label for="">Hostel Or Day Scholar:</label>
+                    <select name="" id="hostel-day" required>
+                        <option value="" disabled>Hostel Or Day Scholar</option>
+                        <option value="Day Scholar">Day Scholar</option>
+                        <option value="Hostel">Hostel</option>
+                    </select>
+            </div>
+            <div>
+                <label for="">Address:</label>
+                    <textarea name="" id="address" placeholder="Address" maxlength="250" required></textarea>
+            </div>
+            <div>
+                <label for="">About Yourself:</label>
+                    <textarea name="" id="about" placeholder="About Yourself" maxlength="500" required></textarea>
+            </div>
+            <div>
+                <label for="">Upload Photo:</label>    
+                    <input type="file" placeholder="Upload Photo" autocomplete="off" id="photo" accept=".jpg,.png,.jpeg" required>
+
+            </div>
+            <input type="button" onclick="validateForm()" value="Register"> 
+        </form>
+    </section>
+    
+
+    
+
+
+<script>
+    
+    function validateForm(){
+        console.log("Validation started")
+        var name=document.getElementById("name").value
+        var rollnumber=document.getElementById("roll_number").value
+        var email=document.getElementById("email").value
+        const email_re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        var course=document.getElementById("course").value
+        var dob=document.getElementById("dob").value
+        var fathername=document.getElementById("fathername").value
+        var mothername=document.getElementById("mothername").value
+        var gender=document.querySelector('input[name="gender"]:checked')
+        var phonenumber=document.getElementById("phn_num").value 
+        const re=/^[0-9]{10}$/
+        var hobbies=document.querySelector('input[name="hobbies"]:checked')
+        var percentage=document.getElementById("per").value
+        var coaching=document.getElementById("coaching").value
+        var hostelordayscholar=document.getElementById("hostel-day").value
+        var address=document.getElementById("address").value
+        var aboutyourself=document.getElementById("about").value
+        var uploadphoto = document.getElementById("photo").files[0];
+
+
+        if(name==""||name==null)
+        {
+            window.alert("Name is required")
+            return false
+        }
+        if(rollnumber==""||rollnumber==null)
+        {
+            window.alert("rollnumber is required")
+            return false
+        }
+        if(!email_re.test(email)) 
+        {
+            window.alert("Enter a valid email")
+            return false
+        }
+        if(course.selectedIndex=="")
+        {
+            window.alert("course is required")
+            return false
+        }
+        if(dob=="")
+        {
+            window.alert("dob is required")
+            return false
+        }
+        if(fathername==""||fathername==null)
+        {
+            window.alert("father's name is required")
+            return false
+        }
+        if(mothername==""||mothername==null)
+        {
+            window.alert("mother's name is required")
+            return false
+        }
+        if(gender=="" || gender==null)
+        {
+            window.alert("Gender is required")
+            return false
+        }
+        if(phonenumber==""||phonenumber==null)
+        {
+            window.alert("phonenumber is required")
+            return false
+        }
+        if(!re.test(phonenumber)) 
+        {
+            window.alert(" Enter a valid phonenumber")
+            return false
+        }
+        if(percentage=="" || percentage==null)
+        {
+            window.alert("Percentage is required")
+            return false
+        }
+        if(parseInt(percentage)<1 || parseInt(percentage)>100)
+        {
+            window.alert("choose percentage between 0 to 100")
+            return false
+
+        }
+        if(coaching.selectedIndex=="")
+        {
+            window.alert("Coaching is required")
+            return false
+        }
+        if(hostelordayscholar.selectedIndex)
+        {
+            window.alert("Selection is required")
+            return false
+        }
+        if(address=="" )
+        {
+            window.alert("address is required")
+            return false
+        }
+        if(aboutyourself=="")
+        {
+            window.alert("introduction is required")
+            return false
+        }
+        if(uploadphoto=="")
+        {
+            window.alert("must upload a image file")
+            return false
+        }
+
+
+
+        
+        var dataform = new FormData();
+        dataform.append('name', name);
+        dataform.append('roll_number', rollnumber);
+        dataform.append('email', email);
+        dataform.append('course', course);
+        dataform.append('dob', dob);
+        dataform.append('fathername', fathername);
+        dataform.append('mothername', mothername);
+        dataform.append('gender', gender.value);
+        dataform.append('phn_num', phonenumber);
+        dataform.append('hobbies', hobbies.value);
+        dataform.append('per', percentage);
+        dataform.append('coaching', coaching);
+        dataform.append('hostel-day', hostelordayscholar);
+        dataform.append('address', address);
+        dataform.append('about', aboutyourself);
+        dataform.append('photo', uploadphoto);
+
+        $.ajax({
+            type: "POST",
+            url: "/add_student/",
+            data: dataform,
+            processData: false, 
+            contentType: false, 
+            success: function(data) {
+                alert("Registered successfully");
+            },
+            error: function() {
+                alert("Registration failed. Please try again.");
+            }
+        });
+        return true
+    }
+   
+</script>
+</body>
+</html>

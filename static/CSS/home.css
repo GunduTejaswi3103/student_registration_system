@@ -1,0 +1,35 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    background-image: url('college_campus.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.clg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    color:white;
+    padding: 0 20px;
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: rgb(226, 73, 73);
+}
+
+.p {
+    font-size: 20px;
+    max-width: 600px;
+    color: rgb(226, 73, 73);
+}
